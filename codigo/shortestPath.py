@@ -70,13 +70,13 @@ def cargarGrafo(mapa:Grafo):
     mapa.tamaño = numeroNodos
 
 def mod1(distancia,riesgo):
-    return riesgo
+    return distancia+riesgo
 
 def mod2(distancia,riesgo):
-    return distancia
+    return distancia*riesgo
 
 def mod3(distancia,riesgo):
-    return distancia+riesgo*100000
+    return distancia+riesgo*1000
 
 def graficarCamino(mapa:Grafo,camino,color,ax):
     for i in range(len(camino)-1):
@@ -91,22 +91,28 @@ def main():
     mapa = Grafo()
     cargarGrafo(mapa)
 
-    inicio = time.time()
-    resultadoEafitUnal = caminoCorto(mapa,8462,11296,mod1)
-    print(f"El camino 1 se demoro {round(time.time()-inicio)} segundos y la distancia fue de {mapa.obtenerDistaciaTotal(resultadoEafitUnal[0])} con un riesgo de {mapa.obtenerRiesgoTotal(resultadoEafitUnal[0])}")
-    graficarCamino(mapa,resultadoEafitUnal[0],"red",ax)
-    
-    inicio = time.time()
-    resultadoEafitUnal = caminoCorto(mapa,8462,11296,mod2)
-    print(f"El camino 2 se demoro {round(time.time()-inicio)} segundos y la distancia fue de {mapa.obtenerDistaciaTotal(resultadoEafitUnal[0])} con un riesgo de {mapa.obtenerRiesgoTotal(resultadoEafitUnal[0])}")
-    graficarCamino(mapa,resultadoEafitUnal[0],"green",ax)
+    Eafit = 22088 # mapa.vertices["(-75.5778046, 6.2029412)"]
+    Unal = 3689 # mapa.vertices["(-75.5762232, 6.266327)"]
+    UdeA = 11296
 
     inicio = time.time()
-    resultadoEafitUnal = caminoCorto(mapa,8462,11296,mod3)
-    print(f"El camino 3 se demoro {round(time.time()-inicio)} segundos y la distancia fue de {mapa.obtenerDistaciaTotal(resultadoEafitUnal[0])} con un riesgo de {mapa.obtenerRiesgoTotal(resultadoEafitUnal[0])}")
-    graficarCamino(mapa,resultadoEafitUnal[0],"purple",ax)
+    resultadoEafitUdeA = caminoCorto(mapa,22088,11296,mod1)
+    print(f"El camino 1 se demoro {round(time.time()-inicio)} segundos y la distancia fue de {mapa.obtenerDistaciaTotal(resultadoEafitUdeA[0])} con un riesgo de {mapa.obtenerRiesgoTotal(resultadoEafitUdeA[0])}")
+    graficarCamino(mapa,resultadoEafitUdeA[0],"red",ax)
+    
+    inicio = time.time()
+    resultadoEafitUdeA = caminoCorto(mapa,22088,11296,mod2)
+    print(f"El camino 2 se demoro {round(time.time()-inicio)} segundos y la distancia fue de {mapa.obtenerDistaciaTotal(resultadoEafitUdeA[0])} con un riesgo de {mapa.obtenerRiesgoTotal(resultadoEafitUdeA[0])}")
+    graficarCamino(mapa,resultadoEafitUdeA[0],"green",ax)
+
+    inicio = time.time()
+    resultadoEafitUdeA = caminoCorto(mapa,22088,11296,mod3)
+    print(f"El camino 3 se demoro {round(time.time()-inicio)} segundos y la distancia fue de {mapa.obtenerDistaciaTotal(resultadoEafitUdeA[0])} con un riesgo de {mapa.obtenerRiesgoTotal(resultadoEafitUdeA[0])}")
+    graficarCamino(mapa,resultadoEafitUdeA[0],"purple",ax)
 
     plt.show()
-    
+
+
+
 if __name__ == '__main__':
     main()

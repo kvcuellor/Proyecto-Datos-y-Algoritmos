@@ -56,19 +56,14 @@ class Grafo:
     def obtenerRiesgoTotal(self,camino):
         risk = 0
         for i in range(len(camino)-1):
-            risk+= self.getRisk(camino[i],camino[i+1])
+            risk+= self.getData(camino[i],camino[i+1])[3]
         return risk/len(camino)
 
     def getDistance(self,inicio,destino):
         return self.getData(inicio,destino)[2]
-
-    def getRisk(self,inicio,destino):
-        return self.getData(inicio,destino)[3]
     
     def getPeso(self,inicio,destino,funcionPeso=None):
         if funcionPeso is None:
             return self.getDistance(inicio,destino)
         data = self.getData(inicio,destino)
         return funcionPeso(data[2],data[3])
-
-            
